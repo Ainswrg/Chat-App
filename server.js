@@ -35,9 +35,19 @@ io.on("connection", (socket) => {
     socket.join(roomId);
     rooms.get(roomId).get('users').set(socket.id, userName);
     const users = [...rooms.get(roomId).get('users').values()];
-    socket.to(roomId).emit('ROOM:JOINED', users);
-    // io.in(roomId).emit("ROOM:JOINED", users);
+    // socket.to(roomId).emit('ROOM:JOINED', users);
+    io.in(roomId).emit("ROOM:JOINED", users);
   });
+
+  socket.on('disconnect', () => {
+    rooms.forEach((value, roomId) => {
+      if(value.get('users').delete(socket.id)) {
+        const users = [...value.get('users').values()];
+        // socket.to(roomId).emit('ROOM:LEAVE',users);
+        io.to(roomId).emit('ROOM:SET_USERS',users);
+      }
+    });
+  })
 
   console.log("socket connected", socket.id);
 });

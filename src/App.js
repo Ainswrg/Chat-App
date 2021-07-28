@@ -1,4 +1,5 @@
 import React from "react";
+import Chat from "./components/Chat";
 import JoinBlock from "./components/JoinBlock";
 import reducer from "./reducer";
 import socket from "./socket";
@@ -8,6 +9,8 @@ function App() {
     joined: false,
     roomId: null,
     userName: null,
+    users: [],
+    messages: [],
   });
 
   const onLogin = (obj) => {
@@ -19,10 +22,16 @@ function App() {
     socket.emit("ROOM:JOIN", obj);
   };
 
-  React.useEffect(() => {
-    socket.on('ROOM:JOINED', (users) => {
-      console.log("new user", users);
+  const setUsers = (users) => {
+    dispatch({
+      type: 'SET_USERS',
+      payload: users,
     });
+  }
+
+  React.useEffect(() => {
+    socket.on('ROOM:JOINED', setUsers);
+    socket.on('ROOM:SET_USERS', setUsers, []);
   },[]);
 
 
@@ -30,7 +39,7 @@ function App() {
 
   return (
     <div className='wrapper'>
-      {!state.joined && <JoinBlock onLogin={onLogin} />}
+      {!state.joined ? <JoinBlock onLogin={onLogin}/> : <Chat {...state}/>}
     </div>
   );
 }
