@@ -1,5 +1,5 @@
-import axios from "axios";
 import React from "react";
+import axios from "axios";
 import socket from "../socket";
 
 
@@ -13,12 +13,13 @@ const JoinBlock = ({onLogin}) => {
     if (!roomId || !userName) {
       return alert("Invalid data");
     }
-    setLoading(true)
-    await axios.post("/rooms", {
+    const obj = {
       roomId,
       userName,
-    });
-    onLogin();
+    };
+    setLoading(true);
+    await axios.post("/rooms", obj);
+    onLogin(obj);
   };
   return (
     <div className='join-block'>
