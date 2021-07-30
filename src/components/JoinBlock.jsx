@@ -1,13 +1,10 @@
 import React from "react";
 import axios from "axios";
-import socket from "../socket";
 
-
-const JoinBlock = ({onLogin}) => {
+const JoinBlock = ({ onLogin }) => {
   const [roomId, setRoomId] = React.useState("");
   const [userName, setUserName] = React.useState("");
   const [isLoading, setLoading] = React.useState(false);
-
 
   const onEnter = async () => {
     if (!roomId || !userName) {
@@ -35,8 +32,12 @@ const JoinBlock = ({onLogin}) => {
         value={userName}
         onChange={(e) => setUserName(e.target.value)}
       />
-      <button disabled={isLoading} onClick={onEnter} className='btn btn-success'>
-        {isLoading ? 'LOGIN...': 'ENTER'}
+      <button
+        disabled={isLoading}
+        onClick={onEnter}
+        className='btn btn-success'
+      >
+        {isLoading ? "LOGIN..." : "ENTER"}
       </button>
     </div>
   );
