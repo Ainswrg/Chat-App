@@ -1,13 +1,12 @@
-
 * {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
-    'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+    "Helvetica Neue", sans-serif;
   outline: none;
   color: black;
 }
 
 .wrapper {
-  max-width: 40%;
+  max-width: 60%;
   margin: 100px auto;
   min-width: 720px;
 }
@@ -39,7 +38,8 @@
   height: 500px;
   border: 1px solid rgba(159, 183, 197, 0.2);
   border-radius: 8px;
-  overflow: hidden;
+  /* width: 100%; */
+  background-color: #e5e7eb;
 }
 
 .chat-users {
@@ -65,21 +65,39 @@
 
 .message {
   margin-bottom: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  word-wrap: break-word;
+}
+.message.my {
+  flex-direction: row;
+  justify-content: flex-end;
+  word-wrap: break-word;
 }
 
 .message p {
-  display: inline-flex;
+  /* display: inline-flex; */
   border-radius: 10px;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
   background-color: #7160ff;
   padding: 10px 15px 15px;
   color: #fff;
+  max-width: 350px;
   margin-bottom: 2px;
+  overflow: hidden;
+  word-wrap: break-word;
 }
 
-.message span {
+.message.my p {
+  background-color: white;
+  color: gray;
+}
+.message div {
   opacity: 0.5;
   font-size: 14px;
+  word-wrap: break-word;
 }
 
 .chat-users ul {
@@ -106,4 +124,22 @@
 .chat-messages form textarea {
   width: 100%;
   margin-bottom: 10px;
+}
+form {
+  display: flex;
+  justify-content: flex-end;
+}
+form button {
+  height: 85px;
+}
+
+.user-img {
+  display: flex;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  margin: 0 5px;
+  background: gray;
+  align-items: center;
+  justify-content: center;
 }
